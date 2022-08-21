@@ -25,6 +25,12 @@ class App extends Component {
   };
 
   componentDidMount() {
+    const { appServiceWorker } = this.props
+    appServiceWorker.onInstalled(() => this.setState({ showInstalledMessage: true }))
+    appServiceWorker.onUpdateFound(() => this.setState({ showUpdateMessage: true }))
+}
+
+  componentDidMount() {
     const token = localStorage.getItem('token');
     const expiryDate = localStorage.getItem('expiryDate');
     if (!token || !expiryDate) {
